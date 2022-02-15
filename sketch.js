@@ -9,7 +9,7 @@ let lastChange = 0;
 
 let blurShader;
 let opacityControl = 1;
-let blurControl = 0;
+let blurFade = 0;
 
 
 
@@ -31,20 +31,21 @@ function setup() {
   lastChange = millis();
   blurShader.init();
 
-  blurShader.setBlurAmount(blurControl);
+  blurShader.setBlurAmount(blurFade);
   fadeTime = constrain(fadeTime,0,interval/2);
   console.log("loaded " + imgs.length + " images");
 }
 
 function draw() {
   controlChange();
-  blurShader.setBlurAmount(blurControl);
+  blurShader.setBlurAmount(blurFade);
   background(255,0,0);
   tempTexture.background(0);
   tempTexture.tint(255,opacityControl*255);
   tempTexture.image(imgs[index],0,0,width,height);
   blurShader.apply(tempTexture);
   image(blurShader.getResult(), 0,0, width, height);
+  //console.log(blurControl);
 }
 
 
@@ -62,6 +63,11 @@ function controlChange(){
     opacityControl = map(millis() - lastChange, interval - fadeTime, interval, 1, 0);
   }
 
-  blurControl = (1-opacityControl) * .5;
+  
+  if(opacityControl < 0.5){
+    blurFade = 0.5 - opacityControl;
+  }else{
+    blurFade = 0;
+  }
 
 }
