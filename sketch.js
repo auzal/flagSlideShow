@@ -1,10 +1,11 @@
 let imgs = [];
+let indexes = [];
 let index = 0;
 
 let tempTexture;
 
 let intervalRange = 15000;
-let interval = 10000;
+let interval = 1000;
 let fadeTime = 2000;
 let lastChange = 0;
 let waitTime = 2000;
@@ -15,7 +16,6 @@ let blurFade = 0;
 
 let blurNoise;
 
-let nextIndex = 1;
 
 let waiting = false;
 
@@ -52,7 +52,7 @@ function draw() {
   blurNoise = noise(frameCount*0.1);
   blurNoise = blurNoise * 0.5;
   blurShader.setBlurAmount(blurNoise + blurFade);
-  background(255,0,0);
+  background(0,0,0);
   tempTexture.background(0);
   tempTexture.tint(255,opacityControl*255*0.75);
   tempTexture.image(imgs[index],0,0,width,height);
@@ -68,11 +68,10 @@ function controlChange(){
       
         index ++;
         index = index % imgs.length;
-        nextIndex = index++;
-        nextIndex = nextIndex % imgs.length;
         lastChange = millis();
         opacityControl = 0;
         waiting = true;
+        console.log("index = " + index);
       
     }
 
