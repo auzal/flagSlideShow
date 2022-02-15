@@ -3,7 +3,7 @@ let index = 0;
 
 let tempTexture;
 
-let intervalRange = 10000;
+let intervalRange = 15000;
 let interval = 10000;
 let fadeTime = 2000;
 let lastChange = 0;
@@ -20,6 +20,7 @@ let nextIndex = 1;
 let waiting = false;
 
 //let out = false;
+
 
 
 
@@ -49,7 +50,7 @@ function draw() {
   controlChange();
 
   blurNoise = noise(frameCount*0.1);
-  blurNoise = blurNoise * 0.3;
+  blurNoise = blurNoise * 0.5;
 
   blurShader.setBlurAmount(blurNoise + blurFade);
   background(255,0,0);
