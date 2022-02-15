@@ -49,7 +49,7 @@ function setup() {
 function draw() {
   controlChange();
 
-  blurNoise = noise(frameCount*0.1);
+  blurNoise = noise(frameCount*0.07);
   blurNoise = blurNoise * 0.5;
   blurShader.setBlurAmount(blurNoise + blurFade);
   background(0,0,0);
