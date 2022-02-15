@@ -51,7 +51,6 @@ function draw() {
 
   blurNoise = noise(frameCount*0.1);
   blurNoise = blurNoise * 0.5;
-
   blurShader.setBlurAmount(blurNoise + blurFade);
   background(255,0,0);
   tempTexture.background(0);
