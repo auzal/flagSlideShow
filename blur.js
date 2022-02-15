@@ -18,7 +18,9 @@ class Blur{
     }
 
     setBlurAmount(val){  // 0 to 1
+        val = constrain(val,0,1);
         this.blurAmount = val;
+        
     }
 
     apply(originalTexture){
