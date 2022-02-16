@@ -17,7 +17,7 @@ let blurFade = 0;
 let blurNoise;
 
 
-let waiting = false;
+let waiting =  false;
 
 //let out = false;
 
