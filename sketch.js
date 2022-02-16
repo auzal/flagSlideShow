@@ -44,6 +44,9 @@ function setup() {
   blurShader.setBlurAmount(blurFade);
   fadeTime = constrain(fadeTime,0,interval/2);
   console.log("loaded " + imgs.length + " images");
+  shuffleIndexes();
+
+
 }
 
 function draw() {
@@ -55,7 +58,7 @@ function draw() {
   background(0,0,0);
   tempTexture.background(0);
   tempTexture.tint(255,opacityControl*255*0.75);
-  tempTexture.image(imgs[index],0,0,width,height);
+  tempTexture.image(imgs[indexes[index]],0,0,width,height);
   blurShader.apply(tempTexture);
   image(blurShader.getResult(), 0,0, width, height);
   //console.log(blurControl);
@@ -68,6 +71,9 @@ function controlChange(){
       
         index ++;
         index = index % imgs.length;
+        if(index === 0){
+          shuffleIndexes();
+        }
         lastChange = millis();
         opacityControl = 0;
         waiting = true;
@@ -100,4 +106,36 @@ function controlChange(){
     blurFade = 0;
   }
 
+}
+
+
+
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
+function shuffleIndexes(){
+  let temp = [];
+  temp = [1,2,3,4,5,6,7,8,9];
+  temp = shuffle(temp);
+  indexes[0]= 0;
+  for(let i = 0 ; i < temp.length; i ++){
+    indexes[i+1] = temp[i];
+  }
+  indexes[10] = 10;
+  console.log(indexes);
 }
